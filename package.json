@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "mongoose": "^7.5.3",
     "next": "13.5.4",
     "react": "^18",
