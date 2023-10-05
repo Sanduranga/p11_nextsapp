@@ -26,3 +26,9 @@ export async function POST(request: any) {
   });
   return NextResponse.json({ message: "Student Registered" }, { status: 201 });
 }
+
+export async function GET() {
+  await connectMongoDB();
+  const ourStudents = await Student.find();
+  return NextResponse.json({ ourStudents }, { status: 200 });
+}

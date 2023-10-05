@@ -1,12 +1,20 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
 
 function AddStudent() {
   const [formData, setFormData] = useState({});
-  const [submitData, setSubmitData] = useState({});
-  const handleInputs = (e: any) => {
-    console.log(formData);
+  const handleInputs = async (e: any) => {
     e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/student",
+        formData
+      );
+      alert(res.data.message);
+    } catch (res) {
+      alert(res);
+    }
   };
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,7 +33,7 @@ function AddStudent() {
           onChange={handleChange}
           className="px-2 rounded"
           placeholder="Student name"
-          name="StudentName"
+          name="studentName"
         />
         <div className="flex justify-between">
           <input
@@ -38,7 +46,7 @@ function AddStudent() {
             onChange={handleChange}
             className="px-2 rounded"
             placeholder="Subject1 marks"
-            name="marks1"
+            name="subject1Marks"
           />
         </div>
         <div className="flex justify-between">
@@ -52,7 +60,7 @@ function AddStudent() {
             onChange={handleChange}
             className="px-2 rounded"
             placeholder="Subject2 marks"
-            name="marks2"
+            name="subject2Marks"
           />
         </div>
         <div className="flex justify-between">
@@ -66,7 +74,7 @@ function AddStudent() {
             onChange={handleChange}
             className="px-2 rounded"
             placeholder="Subject3 marks"
-            name="marks3"
+            name="subject3Marks"
           />
         </div>
         <button>Submite</button>
