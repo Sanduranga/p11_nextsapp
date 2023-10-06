@@ -1,15 +1,35 @@
-"use client";
+"user client";
 import axios from "axios";
 import React, { useState } from "react";
 
-function AddStudent() {
-  const [formData, setFormData] = useState({});
+function EditForm({
+  _id,
+  studentId,
+  studentName,
+  subject1Name,
+  subject1Marks,
+  subject2Name,
+  subject2Marks,
+  subject3Name,
+  subject3Marks,
+}: any) {
+  // _id;
+  // studentId;
+  // studentName;
+  // subject1Name;
+  // subject1Marks;
+  // subject2Name;
+  // subject2Marks;
+  // subject3Name;
+  // subject3Marks;
+
+  const [editFormData, setEditFormData] = useState({});
   const handleInputs = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/student",
-        formData
+      const res = await axios.put(
+        `http://localhost:3000/api/student/${_id}`,
+        editFormData
       );
       alert(res.data.message);
     } catch (res) {
@@ -17,7 +37,7 @@ function AddStudent() {
     }
   };
   const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setEditFormData({ ...editFormData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -26,63 +46,61 @@ function AddStudent() {
         <input
           onChange={handleChange}
           className="px-2 rounded"
-          placeholder="Student ID"
-          name="studentId"
+          placeholder={studentId}
+          name="newStudentId"
         />
         <input
           onChange={handleChange}
           className="px-2 rounded"
-          placeholder="Student name"
-          name="studentName"
+          placeholder={studentName}
+          name="newStudentName"
         />
         <div className="flex justify-between">
           <input
             onChange={handleChange}
             className="px-2 rounded"
-            placeholder="Subject1 name"
-            name="subject1Name"
+            placeholder={subject1Name}
+            name="newSubject1Name"
           />
           <input
             onChange={handleChange}
             className="px-2 rounded"
-            placeholder="Subject1 marks"
-            name="subject1Marks"
+            placeholder={subject1Marks}
+            name="newSubject1Marks"
           />
         </div>
         <div className="flex justify-between">
           <input
             onChange={handleChange}
             className="px-2 rounded"
-            placeholder="Subject2 name"
-            name="subject2Name"
+            placeholder={subject2Name}
+            name="newSubject2Name"
           />
           <input
             onChange={handleChange}
             className="px-2 rounded"
-            placeholder="Subject2 marks"
-            name="subject2Marks"
+            placeholder={subject2Marks}
+            name="newSubject2Marks"
           />
         </div>
         <div className="flex justify-between">
           <input
             onChange={handleChange}
             className="px-2 rounded"
-            placeholder="Subject3 name"
-            name="subject3Name"
+            placeholder={subject3Name}
+            name="newSubject3Name"
           />
           <input
             onChange={handleChange}
             className="px-2 rounded"
-            placeholder="Subject3 marks"
-            name="subject3Marks"
+            placeholder={subject3Marks}
+            name="newSubject3Marks"
           />
         </div>
-        <button className="p-2 bg-blue-700 text-white font-bold">
-          Submite
-        </button>
+        <button className="p-2 bg-blue-800 text-white font-bold">Update</button>
       </form>
     </div>
   );
 }
 
-export default AddStudent;
+export default EditForm;

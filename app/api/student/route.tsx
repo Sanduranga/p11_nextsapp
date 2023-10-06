@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: any) {
   const {
-    id,
+    studentId,
     studentName,
     subject1Name,
     subject1Marks,
@@ -15,7 +15,7 @@ export async function POST(request: any) {
   } = await request.json();
   await connectMongoDB();
   await Student.create({
-    id,
+    studentId,
     studentName,
     subject1Name,
     subject1Marks,
@@ -31,4 +31,10 @@ export async function GET() {
   await connectMongoDB();
   const ourStudents = await Student.find();
   return NextResponse.json({ ourStudents }, { status: 200 });
+}
+export async function DELETE(request: any) {
+  const id = request.nextUrl.searchParams.get("id");
+  await connectMongoDB();
+  await Student.findByIdAndDelete(id);
+  return NextResponse.json({ message: "Student deletet" }, { status: 200 });
 }

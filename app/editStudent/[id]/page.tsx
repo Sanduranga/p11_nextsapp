@@ -1,25 +1,48 @@
+"use client";
+import EditForm from "@/components/EditForm";
+import axios from "axios";
 import React from "react";
 
-function editStudent() {
+const getStudentToEdit = async (id: any) => {
+  try {
+    const res = await axios.get(`http://localhost:3000/api/student/${id}`);
+    console.log(res.data.student);
+    return res.data.student;
+  } catch (error) {
+    alert(error);
+  }
+};
+
+async function editStudent({ params }: any) {
+  const { id } = params;
+  const toBeUpdate: any = await getStudentToEdit(id);
+  const {
+    _id,
+    studentId,
+    studentName,
+    subject1Name,
+    subject1Marks,
+    subject2Name,
+    subject2Marks,
+    subject3Name,
+    subject3Marks,
+    createdAt,
+    updatedAt,
+    __v,
+  } = toBeUpdate;
+
   return (
-    <div>
-      <div className="flex flex-col gap-3 mt-10">
-        <input className="px-2 rounded" placeholder="Student ID" />
-        <input className="px-2 rounded" placeholder="Student name" />
-        <div className="flex justify-between">
-          <input className="px-2 rounded" placeholder="Subject1 name" />
-          <input className="px-2 rounded" placeholder="Subject1 marks" />
-        </div>
-        <div className="flex justify-between">
-          <input className="px-2 rounded" placeholder="Subject2 name" />
-          <input className="px-2 rounded" placeholder="Subject2 marks" />
-        </div>
-        <div className="flex justify-between">
-          <input className="px-2 rounded" placeholder="Subject3 name" />
-          <input className="px-2 rounded" placeholder="Subject3 marks" />
-        </div>
-      </div>
-    </div>
+    <EditForm
+      _id={_id}
+      studentId={studentId}
+      studentName={studentName}
+      subject1Name={subject1Name}
+      subject1Marks={subject1Marks}
+      subject2Name={subject2Name}
+      subject2Marks={subject2Marks}
+      subject3Name={subject3Name}
+      subject3Marks={subject3Marks}
+    />
   );
 }
 
