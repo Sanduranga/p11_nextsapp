@@ -32,7 +32,7 @@ export default function OurStudents() {
       .catch((err) => {
         alert(err);
       });
-  }, []);
+  }, [router]);
 
   const handleDelete = async (_id: string) => {
     const confirmed = confirm("Are you sure?");
