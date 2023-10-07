@@ -2,6 +2,7 @@ import NavigationBar from "@/components/NavigationBar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Providers from "../redux/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="max-w-3xl mx-auto p-4 bg-slate-400">
-          <NavigationBar />
-          {children}
+          <Providers>
+            <NavigationBar />
+            {children}
+          </Providers>
         </div>
       </body>
     </html>

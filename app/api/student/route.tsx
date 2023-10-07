@@ -30,7 +30,7 @@ export async function POST(request: any) {
 export async function GET() {
   await connectMongoDB();
   const ourStudents = await Student.find();
-  return NextResponse.json({ ourStudents }, { status: 200 });
+  return Response.json({ ourStudents }, { status: 200 });
 }
 export async function DELETE(request: any) {
   const id = request.nextUrl.searchParams.get("id");

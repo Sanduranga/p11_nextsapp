@@ -4,8 +4,11 @@ import { HiPencilAlt } from "react-icons/hi";
 import { HiOutlineTrash } from "react-icons/hi";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { fetchStudents } from "@/redux/features/studentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/Store";
 
-interface ourStd {
+export interface ourStd {
   _id: string;
   studentId: number;
   studentName: string;
@@ -21,29 +24,33 @@ interface ourStd {
 }
 
 export default function OurStudents() {
-  const [students, setStudent] = useState([]);
+  // const [students, setStudent] = useState([]);
   const router = useRouter();
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/student")
-      .then((res) => {
-        setStudent(res.data.ourStudents);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }, [router]);
+    // axios
+    //   .get("http://localhost:3000/api/student")
+    //   .then((res) => {
+    //     setStudent(res.data.ourStudents);
+    //     caches.delete;
+    //   })
+    //   .catch((err) => {
+    //     alert(err);
+    //   });
+    dispatch(fetchStudents() as any);
+  }, [dispatch]);
+
+  const students = useSelector((state: RootState) => state.student.ourStudents);
 
   const handleDelete = async (_id: string) => {
     const confirmed = confirm("Are you sure?");
     if (confirmed) {
-      await axios
-        .delete(`http://localhost:3000/api/student?id=${_id}`)
-        .then((res) => alert(res.data.message))
-        .catch((error) => {
-          alert(error);
-        });
-      router.refresh();
+      const res = await fetch(`http://localhost:3000/api/student?id=${_id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        router.refresh();
+      }
     }
   };
 

@@ -1,19 +1,26 @@
 "use client";
-import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 function AddStudent() {
   const [formData, setFormData] = useState({});
+  const router = useRouter();
   const handleInputs = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/student",
-        formData
-      );
-      alert(res.data.message);
-    } catch (res) {
-      alert(res);
+      const res = await fetch("http://localhost:3000/api/student", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to update student");
+      }
+      router.push("/ourStudents");
+    } catch (err) {
+      alert(err);
     }
   };
   const handleChange = (e: any) => {
