@@ -1,11 +1,13 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
 export const fetchStudents = createAsyncThunk(
   "student/fetchStudents",
   async () => {
-    const res = await axios("http://localhost:3000/api/student");
-    return res.data.ourStudents;
+    const res = await fetch("http://localhost:3000/api/student", {
+      cache: "no-store",
+    });
+    const { ourStudents } = await res.json();
+    return ourStudents;
   }
 );
 

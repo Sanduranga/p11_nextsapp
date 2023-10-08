@@ -1,12 +1,11 @@
 import connectMongoDB from "@/lib/mongoDB";
 import Student from "@/models/newStudent";
-import { NextResponse } from "next/server";
 
 export async function GET(request: any, { params }: any) {
   const { id } = params;
   await connectMongoDB();
-  const student = await Student.findOne({ _id: id });
-  return NextResponse.json({ student }, { status: 200 });
+  const student = await Student.findOne({ studentId: id });
+  return Response.json({ student }, { status: 200 });
 }
 export async function PUT(request: any, { params }: any) {
   const { id } = params;
@@ -31,5 +30,5 @@ export async function PUT(request: any, { params }: any) {
     subject3Name,
     subject3Marks,
   });
-  return NextResponse.json({ message: "Student updated" }, { status: 200 });
+  return Response.json({ message: "Student updated" }, { status: 200 });
 }

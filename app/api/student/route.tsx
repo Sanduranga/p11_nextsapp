@@ -1,6 +1,5 @@
 import connectMongoDB from "@/lib/mongoDB";
 import Student from "@/models/newStudent";
-import { NextResponse } from "next/server";
 
 export async function POST(request: any) {
   const {
@@ -24,7 +23,7 @@ export async function POST(request: any) {
     subject3Name,
     subject3Marks,
   });
-  return NextResponse.json({ message: "Student Registered" }, { status: 201 });
+  return Response.json({ message: "Student Registered" }, { status: 201 });
 }
 
 export async function GET() {
@@ -36,5 +35,5 @@ export async function DELETE(request: any) {
   const id = request.nextUrl.searchParams.get("id");
   await connectMongoDB();
   await Student.findByIdAndDelete(id);
-  return NextResponse.json({ message: "Student deletet" }, { status: 200 });
+  return Response.json({ message: "Student deletet" }, { status: 200 });
 }
