@@ -7,7 +7,7 @@ export default function StudentDetails() {
   const [name, setName] = useState("kamal");
   const handleClick = async () => {
     const res = await axios.get(`http://localhost:3000/api/student/${value}`);
-    console.log(res.data.student.studentName);
+
     const getName = res.data.student.studentName;
 
     setName(getName);

@@ -1,26 +1,20 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface IUser extends Document {
-  studentId: string;
+interface IStudent extends Document {
   studentName: string;
-  subject1Name: string;
-  subject1Marks: number;
-  subject2Name: string;
-  subject2Marks: number;
-  subject3Name: string;
-  subject3Marks: number;
+  studentId: string;
+  gender: string;
+  subjectName: string;
+  subjectMarks: number;
 }
 
-const studentSchema: Schema<IUser> = new Schema(
+const studentSchema: Schema<IStudent> = new Schema(
   {
-    studentId: { type: String, required: true },
     studentName: { type: String, required: true },
-    subject1Name: { type: String, required: true },
-    subject1Marks: { type: Number, required: true },
-    subject2Name: { type: String },
-    subject2Marks: { type: Number },
-    subject3Name: { type: String },
-    subject3Marks: { type: Number },
+    studentId: { type: String, required: true },
+    gender: { type: String, required: true },
+    subjectName: { type: String },
+    subjectMarks: { type: Number, required: true },
   },
   {
     timestamps: true,
@@ -28,6 +22,6 @@ const studentSchema: Schema<IUser> = new Schema(
 );
 
 const Student =
-  mongoose.models.Topic || mongoose.model<IUser>("Topic", studentSchema);
+  mongoose.models.Student || mongoose.model<IStudent>("Student", studentSchema);
 
 export default Student;

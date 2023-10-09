@@ -10,25 +10,19 @@ export async function GET(request: any, { params }: any) {
 export async function PUT(request: any, { params }: any) {
   const { id } = params;
   const {
-    newStudentId: studentId,
     newStudentName: studentName,
-    newSubject1Name: subject1Name,
-    newSubject1Marks: subject1Marks,
-    newSubject2Name: subject2Name,
-    newSubject2Marks: subject2Marks,
-    newSubject3Name: subject3Name,
-    newSubject3Marks: subject3Marks,
+    newStudentId: studentId,
+    newgender: gender,
+    newSubjectName: subjectName,
+    newSubjectMarks: subjectMarks,
   } = await request.json();
   await connectMongoDB();
-  const student = await Student.findByIdAndUpdate(id, {
-    studentId,
+  await Student.findByIdAndUpdate(id, {
     studentName,
-    subject1Name,
-    subject1Marks,
-    subject2Name,
-    subject2Marks,
-    subject3Name,
-    subject3Marks,
+    studentId,
+    gender,
+    subjectName,
+    subjectMarks,
   });
   return Response.json({ message: "Student updated" }, { status: 200 });
 }

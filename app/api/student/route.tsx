@@ -2,26 +2,15 @@ import connectMongoDB from "@/lib/mongoDB";
 import Student from "@/models/newStudent";
 
 export async function POST(request: any) {
-  const {
-    studentId,
-    studentName,
-    subject1Name,
-    subject1Marks,
-    subject2Name,
-    subject2Marks,
-    subject3Name,
-    subject3Marks,
-  } = await request.json();
+  const { studentName, studentId, gender, subjectName, subjectMarks } =
+    await request.json();
   await connectMongoDB();
   await Student.create({
-    studentId,
     studentName,
-    subject1Name,
-    subject1Marks,
-    subject2Name,
-    subject2Marks,
-    subject3Name,
-    subject3Marks,
+    studentId,
+    gender,
+    subjectName,
+    subjectMarks,
   });
   return Response.json({ message: "Student Registered" }, { status: 201 });
 }
