@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@types/mongoose": "^5.11.97",
     "axios": "^1.5.1",
+    "mongodb": "^6.1.0",
     "mongoose": "^7.5.3",
     "next": "13.5.4",
     "react": "^18",
