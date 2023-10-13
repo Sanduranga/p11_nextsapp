@@ -50,10 +50,10 @@ export default function OurStudents() {
             : "hidden"
         }`}
       >
-        <div className="flex justify-center items-center space-x-1 text-sm text-gray-700">
+        <div className="flex justify-center items-center space-x-1 text-sm text-gray-800">
           <svg
             fill="none"
-            className="w-6 h-6 animate-spin"
+            className="w-9 h-9 animate-spin"
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -65,7 +65,7 @@ export default function OurStudents() {
             />
           </svg>
 
-          <div>Loading ...</div>
+          <div className="text-xl">Loading ...</div>
         </div>
       </div>
       <div className={`${isLoading ? "hidden" : "block"}`}>

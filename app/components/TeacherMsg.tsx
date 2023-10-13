@@ -22,7 +22,13 @@ function TeacherMsg() {
       {teacherMsg.map((item: ITeacher) => {
         return (
           <div className="" key={item._id}>
-            <h1 className="mb-3"> this image :{item.videoLink}</h1>
+            <h1 className="mb-3"> Video link :{item.videoLink}</h1>
+            <h1 className="mb-3"> Image 1 link :{item.image1Link}</h1>
+            <h1 className="mb-3"> Image 2 link :{item.image2Link}</h1>
+            <h1 className="mb-3"> Main topic :{item.mainTopic}</h1>
+            <h1 className="mb-3"> Image message :{item.mainMessage}</h1>
+            <h1 className="mb-3"> Image topic :{item.secondTopic}</h1>
+            <h1 className="mb-3"> Image message :{item.secondMessage}</h1>
             <Link
               className="px-3 py-2 bg-green-600 font-bold rounded-md"
               href={`/addTeacherMsg/${item._id}`}
