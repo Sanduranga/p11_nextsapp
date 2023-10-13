@@ -20,6 +20,7 @@ export interface ourStd {
 }
 
 export default function OurStudents() {
+  const apiUrl = process.env.API_URL;
   const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function OurStudents() {
   const handleDelete = async (_id: string) => {
     const confirmed = confirm("Are you sure?");
     if (confirmed) {
-      const res = await fetch(`http://localhost:3000/api/student?id=${_id}`, {
+      const res = await fetch(`${apiUrl}/api/student?id=${_id}`, {
         method: "DELETE",
       });
       if (res.ok) {

@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 export const fetchTeacherData = createAsyncThunk(
   "teacher/fetchTeacherMsg",
   async () => {
-    const res = await fetch("http://localhost:3000/api/teacher", {
+    const res = await fetch("/api/teacher", {
       cache: "no-store",
     });
     const { teacherMsg } = await res.json();

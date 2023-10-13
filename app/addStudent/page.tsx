@@ -8,7 +8,7 @@ function AddStudent() {
   const handleInputs = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/api/student", {
+      const res = await fetch("/api/student", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

@@ -5,7 +5,7 @@ import React from "react";
 
 const getStudentToEdit = async (id: any) => {
   try {
-    const res = await axios.get(`http://localhost:3000/api/student/${id}`);
+    const res = await axios.get(`/api/student/${id}`);
     return res.data.student;
   } catch (error) {
     alert(error);

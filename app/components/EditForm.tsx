@@ -24,10 +24,7 @@ function EditForm({
   const handleUpdate = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await axios.put(
-        `http://localhost:3000/api/student/${_id}`,
-        editFormData
-      );
+      const res = await axios.put(`/api/student/${_id}`, editFormData);
       alert(res.data.message);
       setEditFormData({} as values);
       router.push("/ourStudents");

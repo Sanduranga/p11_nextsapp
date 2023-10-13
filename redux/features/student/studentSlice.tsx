@@ -3,7 +3,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const fetchStudents = createAsyncThunk(
   "student/fetchStudents",
   async () => {
-    const res = await fetch("http://localhost:3000/api/student", {
+    const res = await fetch("/api/student", {
       cache: "no-store",
     });
     const { ourStudents } = await res.json();

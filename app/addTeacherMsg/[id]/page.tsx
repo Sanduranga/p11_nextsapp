@@ -1,6 +1,5 @@
 "use client";
 
-import { ITeacher } from "@/models/teacherMsg";
 import { RootState } from "@/redux/Store";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -16,7 +15,7 @@ function UpdateteacherMsg({ params }: any) {
 
   const handleUpdate = async (e: any) => {
     e.preventDefault();
-    await fetch(`http://localhost:3000/api/teacher/${id}`, {
+    await fetch(`/api/teacher/${id}`, {
       method: "PUT",
       headers: {
         "cpntent-type": "application/json",
