@@ -1,7 +1,8 @@
 import connectMongoDB from "@/lib/mongoDB";
 import Student from "@/models/newStudent";
+import { NextRequest } from "next/server";
 
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const { studentName, studentId, gender, subjectName, subjectMarks } =
     await request.json();
   await connectMongoDB();
@@ -20,7 +21,7 @@ export async function GET() {
   const ourStudents = await Student.find();
   return Response.json({ ourStudents }, { status: 200 });
 }
-export async function DELETE(request: any) {
+export async function DELETE(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
   await connectMongoDB();
   await Student.findByIdAndDelete(id);

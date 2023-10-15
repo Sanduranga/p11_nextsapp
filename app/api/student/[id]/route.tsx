@@ -1,13 +1,14 @@
 import connectMongoDB from "@/lib/mongoDB";
 import Student from "@/models/newStudent";
+import { NextRequest } from "next/server";
 
-export async function GET(request: any, { params }: any) {
+export async function GET(request: NextRequest, { params }: any) {
   const { id } = params;
   await connectMongoDB();
   const student = await Student.findOne({ studentId: id });
   return Response.json({ student }, { status: 200 });
 }
-export async function PUT(request: any, { params }: any) {
+export async function PUT(request: NextRequest, { params }: any) {
   const { id } = params;
   const {
     newStudentName: studentName,

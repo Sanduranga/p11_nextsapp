@@ -9,7 +9,6 @@ export default function Home() {
           Rotary media containethis is Rotary media containethis is Rotary media
           containethis is Rotary media containe
         </h1>
-        <div></div>
       </div>
       <TeacherMsg />
     </div>
