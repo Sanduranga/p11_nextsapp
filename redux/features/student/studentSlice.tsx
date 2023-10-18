@@ -10,7 +10,6 @@ export const fetchStudents = createAsyncThunk(
     return ourStudents;
   }
 );
-
 type iniState = {
   ourStudents: [];
   isLoading: boolean;
@@ -25,7 +24,11 @@ const initialState = {
 const studentSlice = createSlice({
   name: "student",
   initialState,
-  reducers: {},
+  reducers: {
+    deleteStudent: (state, action) => {
+      state.ourStudents.splice(action.payload, 1);
+    },
+  },
   extraReducers(builder) {
     builder.addCase(fetchStudents.pending, (state, action) => {
       state.isLoading = true;
@@ -45,3 +48,4 @@ const studentSlice = createSlice({
 });
 
 export default studentSlice.reducer;
+export const { deleteStudent } = studentSlice.actions;

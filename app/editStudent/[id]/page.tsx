@@ -1,5 +1,5 @@
 "use client";
-import EditForm from "@/app/components/EditForm";
+import EditForm from "@/app/components/EditStudent";
 import axios from "axios";
 import React from "react";
 

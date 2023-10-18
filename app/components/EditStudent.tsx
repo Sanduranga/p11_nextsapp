@@ -1,4 +1,5 @@
 "use client";
+import { fetchStudents } from "@/redux/features/student/studentSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";

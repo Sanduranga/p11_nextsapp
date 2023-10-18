@@ -2,8 +2,10 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { HiPencilAlt } from "react-icons/hi";
 import { HiOutlineTrash } from "react-icons/hi";
-import { useRouter } from "next/navigation";
-import { fetchStudents } from "@/redux/features/student/studentSlice";
+import {
+  deleteStudent,
+  fetchStudents,
+} from "@/redux/features/student/studentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
 
@@ -21,7 +23,6 @@ export interface ourStd {
 
 export default function OurStudents() {
   const apiUrl = process.env.API_URL;
-  const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchStudents() as any);
@@ -30,14 +31,16 @@ export default function OurStudents() {
   const students = useSelector((state: RootState) => state.student.ourStudents);
   const isLoading = useSelector((state: RootState) => state.student.isLoading);
 
-  const handleDelete = async (_id: string) => {
+  const handleDelete = async (_id: string, index: number) => {
     const confirmed = confirm("Are you sure?");
     if (confirmed) {
-      const res = await fetch(`${apiUrl}/api/student?id=${_id}`, {
+      const res = await fetch(`/api/student?id=${_id}`, {
         method: "DELETE",
       });
       if (res.ok) {
-        router.refresh();
+        // const { message } = await res.json();
+        // alert(message);
+        dispatch(deleteStudent(index));
       }
     }
   };
@@ -70,7 +73,7 @@ export default function OurStudents() {
         </div>
       </div>
       <div className={`${isLoading ? "hidden" : "block"}`}>
-        {students.map((ourStudents: ourStd) => {
+        {students.map((ourStudents: ourStd, index) => {
           return (
             <div
               className="flex flex-col justify-center items-center p-3 border-2 border-black shadow-md w-auto"
@@ -91,7 +94,7 @@ export default function OurStudents() {
                 </Link>{" "}
                 <h1
                   onClick={() => {
-                    handleDelete(ourStudents._id);
+                    handleDelete(ourStudents._id, index);
                   }}
                   className="text-red-700"
                 >

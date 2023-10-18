@@ -15,8 +15,6 @@ function TeacherMsg() {
     (state: RootState) => state.teacher.teacherMsg
   ) as [];
 
-  console.log(teacherMsg);
-
   return (
     <div>
       {teacherMsg.map((item: ITeacher) => {
@@ -31,7 +29,7 @@ function TeacherMsg() {
             <h1 className="mb-3"> Image message :{item.secondMessage}</h1>
             <Link
               className="px-3 py-2 bg-green-600 font-bold rounded-md"
-              href={`/addTeacherMsg/${item._id}`}
+              href={`/updateTeacherMsg/${item._id}`}
             >
               <button>Update</button>
             </Link>

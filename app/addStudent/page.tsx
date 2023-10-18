@@ -1,9 +1,12 @@
 "use client";
+import { fetchStudents } from "@/redux/features/student/studentSlice";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 function AddStudent() {
   const [formData, setFormData] = useState({});
+  const dispatch = useDispatch();
   const router = useRouter();
   const handleInputs = async (e: any) => {
     e.preventDefault();
@@ -19,10 +22,9 @@ function AddStudent() {
       if (!res.ok) {
         throw new Error("Failed to update student");
       }
+      // dispatch(fetchStudents() as any);
       router.push("/ourStudents");
-    } catch (err) {
-      alert(err);
-    }
+    } catch (err) {}
   };
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

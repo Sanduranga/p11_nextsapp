@@ -1,32 +1,49 @@
 "use client";
 
 import { RootState } from "@/redux/Store";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 function UpdateteacherMsg({ params }: any) {
+  type abc = {
+    videoLink: string;
+    image1Link: string;
+    image2Link: string;
+    mainTopic: string;
+    mainMessage: string;
+    secondTopic: string;
+    secondMessage: string;
+  };
+
   const { id } = params;
   const [updatedData, setUpdateddata] = useState<any>();
   const teacherData = useSelector(
     (state: RootState) => state.teacher.teacherMsg
   ) as any;
-  const data = teacherData[0];
-  console.log(id);
+
+  const data: abc = teacherData[0];
+  const router = useRouter();
 
   const handleUpdate = async (e: any) => {
     e.preventDefault();
-    await fetch(`/api/teacher/${id}`, {
-      method: "PUT",
-      headers: {
-        "cpntent-type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    });
+    try {
+      const res = await fetch(`/api/teacher/${id}`, {
+        method: "PUT",
+        headers: {
+          "cpntent-type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+      if (!res.ok) {
+        throw new Error("Update error!");
+      }
+      router.push("/");
+    } catch (error) {}
   };
   const handleChange = (e: any) => {
     setUpdateddata({ ...updatedData, [e.target.name]: e.target.value });
   };
-  console.log(updatedData);
 
   return (
     <div>

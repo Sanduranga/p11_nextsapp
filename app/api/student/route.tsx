@@ -22,8 +22,8 @@ export async function GET() {
   return Response.json({ ourStudents }, { status: 200 });
 }
 export async function DELETE(request: NextRequest) {
-  const id = request.nextUrl.searchParams.get("id");
+  const _id = request.nextUrl.searchParams.get("id");
   await connectMongoDB();
-  await Student.findByIdAndDelete(id);
+  await Student.findByIdAndDelete(_id);
   return Response.json({ message: "Student deletet" }, { status: 200 });
 }
