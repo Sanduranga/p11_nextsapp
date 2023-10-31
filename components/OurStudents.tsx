@@ -48,7 +48,8 @@ export default function OurStudents() {
   };
 
   return (
-    <div className="flex justify-center py-5">
+    <div className="flex flex-col items-center justify-center py-5">
+      <div className="font-bold text-xl p-5">Our Students</div>
       <div
         className={`${
           isLoading
