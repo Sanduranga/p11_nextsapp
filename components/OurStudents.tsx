@@ -8,6 +8,8 @@ import {
 } from "@/redux/features/student/studentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
+import StudentForm from "./StudentForm";
+import Field from "./Field";
 
 export interface ourStd {
   _id: string;
@@ -46,7 +48,7 @@ export default function OurStudents() {
   };
 
   return (
-    <div>
+    <div className="flex justify-center py-5">
       <div
         className={`${
           isLoading
@@ -72,31 +74,50 @@ export default function OurStudents() {
           <div className="text-xl">Loading ...</div>
         </div>
       </div>
-      <div className={`${isLoading ? "hidden" : "block"}`}>
+      <div
+        className={`${
+          isLoading ? "hidden" : "block"
+        } flex flex-col justify-center w-[80vw] items-center gap-3 `}
+      >
         {students.map((ourStudents: ourStd, index) => {
           return (
             <div
-              className="flex flex-col justify-center items-center p-3 border-2 border-black shadow-md w-auto"
+              className="flex flex-col justify-start items-center p-3 border-2 border-black shadow-md w-[80vw] rounded-md"
               key={ourStudents?._id}
             >
-              <h1>Student name:{ourStudents?.studentName}</h1>
-              <div>Student ID:{ourStudents?.studentId}</div>
-              <h1>Gender:{ourStudents?.gender}</h1>
-              <h1>
-                Subject:
-                {ourStudents?.subjectName} {""} Marks:
-                {ourStudents?.subjectMarks}
-              </h1>
+              <StudentForm>
+                <Field>Student name:</Field>
+                <Field>: {ourStudents?.studentName}</Field>
+              </StudentForm>
+              <StudentForm>
+                <Field>Student ID:</Field>
+                <Field>: {ourStudents?.studentId}</Field>
+              </StudentForm>
+              <StudentForm>
+                <Field>Gender:</Field>
+                <Field>: {ourStudents?.gender}</Field>
+              </StudentForm>
+              <StudentForm>
+                <Field>Subject:</Field>
+                <Field>: {ourStudents?.subjectName}</Field>
+              </StudentForm>
+              <StudentForm>
+                <Field>Marks</Field>
+                <Field>: {ourStudents?.subjectMarks}</Field>
+              </StudentForm>
 
               <div className="flex">
-                <Link href={`/editStudent/${ourStudents.studentId}`}>
-                  <HiPencilAlt size={24} />
-                </Link>{" "}
+                <h1 className="cursor-pointer">
+                  <Link href={`/editStudent/${ourStudents.studentId}`}>
+                    <HiPencilAlt size={24} />
+                  </Link>
+                </h1>
+
                 <h1
                   onClick={() => {
                     handleDelete(ourStudents._id, index);
                   }}
-                  className="text-red-700"
+                  className="text-red-700 cursor-pointer"
                 >
                   <HiOutlineTrash size={24} />
                 </h1>

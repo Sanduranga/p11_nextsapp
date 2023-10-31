@@ -1,6 +1,6 @@
-import TeacherMsg from "@/app/components/TeacherMsg";
-import Slider from "./components/Slider";
-import BestStudents from "./components/BestStudents";
+import TeacherMsg from "@/components/TeacherMsg";
+import Slider from "../components/Slider";
+import BestStudents from "../components/BestStudents";
 
 export default function Home() {
   return (
